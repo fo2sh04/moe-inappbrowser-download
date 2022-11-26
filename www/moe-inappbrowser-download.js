@@ -115,7 +115,7 @@ exports.open = function (arg0, success, error) {
                     "parent.moedownloader = parent.moedownloader || {};" +
                     "parent.moedownloader.getFilename = function (url) {" +
                         "let fileName = 'unknown-filename';" +
-                        "//Check if is REST API url" +
+                        "/*Check if is REST API url*/" +
                         "if(url.search('/rest/moedownloader/') !== -1) {" +
                             "const new_url = new URL(url);" +
                             "const new_filename = new_url.searchParams.get('filename');" +
