@@ -109,11 +109,11 @@ exports.open = function (arg0, success, error) {
         script += "document.getElementsByTagName(\"body\")[0].classList.add(\"iphone-x\");";
     }
 
-    script += "(function(parent){" +
+    script += "(function(){" +
                     "const pattern = /.*\\/(.+?)\\.([a-z]+)/;" +
                     "const pathPattern = new RegExp('^(?:[^/]*(?:\\\\/(?:\\\\/[^/]*/?)?)?([^\\?]+)(?:\\\\?\\?.+)?)$');" +
-                    "parent.moedownloader = parent.moedownloader || {};" +
-                    "parent.moedownloader.getFilename = function (url) {" +
+                    "window.moedownloader = window.moedownloader || {};" +
+                    "function _getFilename(url) {" +
                         "let fileName = 'unknown-filename';" +
                         "/*Check if is REST API url*/" +
                         "if(url.search('/rest/moedownloader/') !== -1) {" +
@@ -135,32 +135,31 @@ exports.open = function (arg0, success, error) {
                         "}" +
                         "return fileName;" +
                     "}" +
-                    "parent.moedownloader.download = function(e){" +
-                        "const platformAction = window.location + '#';" +
-                        "if(e.target.href && e.target.href !== '#' && e.target.href !== platformAction) {" +
+                    "window.moedownloader.download = function(e){" +
+                        "if(e.target.href !== undefined && e.target.href !== '#') {" +
                             "e.preventDefault();" +
                             "e.stopPropagation();" +
                             "var args = { " +
                                 "url: e.target.href, " +
-                                "filename: parent.moedownloader.getFilename(e.target.href)" +
+                                "filename: _getFilename(e.target.href)" +
                             "};" +
                             "webkit.messageHandlers.cordova_iab.postMessage(JSON.stringify(args));" +
                         "}" +
                     "}" +
-                    "parent.moedownloader.intervalFinder = function(){" +
+                    "window.moedownloader.intervalFinder = function(){" +
                         "const listDownloadButtons = document.querySelectorAll('." + buttonClassName + ":not([data-init=\"set\"]');" +
                         "const platformAction = window.location + '#';" +
                         "listDownloadButtons.forEach(function(element){" +
                             "if (element && element.href && element.href !== platformAction) { " +
-                                "element.addEventListener('click', parent.moedownloader.download);" +
+                                "element.addEventListener('click', window.moedownloader.download);" +
                                 "element.setAttribute('data-init', 'set');" +
                             "} else {" +
                                 "console.warn('The following element has class «" + buttonClassName + "» but does not have a valid href: ', element);" +
                             "}" +
                         "});" +
                     "}" +
-                    "parent.moedownloader.interval = setInterval(parent.moedownloader.intervalFinder, 500);" +
-                "})(window);";
+                    "window.moedownloader.interval = setInterval(window.moedownloader.intervalFinder, 500);" +
+                "})();";
 
     window.inAppBrowserRef.addEventListener('loadstop', function() {
         window.inAppBrowserRef.executeScript({code: script});
