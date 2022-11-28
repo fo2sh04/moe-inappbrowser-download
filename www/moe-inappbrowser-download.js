@@ -110,8 +110,8 @@ exports.open = function (arg0, success, error) {
     }
 
     script += "(function(parent){" +
-                    "const pattern = /.*\/(.+?)\.([a-z]+)/;" +
-                    "const pathPattern = /^(?:[^\/]*(?:\/(?:\/[^\/]*\/?)?)?([^?]+)(?:\??.+)?)$/;" +
+                    "const pattern = /.*\\/(.+?)\\.([a-z]+)/;" +
+                    "const pathPattern = /^(?:[^\\/]*(?:\/(?:\\/[^\\/]*\\/?)?)?([^?]+)(?:\\??.+)?)$/;" +
                     "parent.moedownloader = parent.moedownloader || {};" +
                     "parent.moedownloader.getFilename = function (url) {" +
                         "let fileName = 'unknown-filename';" +
