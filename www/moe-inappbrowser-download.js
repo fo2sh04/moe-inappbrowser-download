@@ -109,7 +109,7 @@ exports.open = function (arg0, success, error) {
         script += "document.getElementsByTagName(\"body\")[0].classList.add(\"iphone-x\");";
     }
 
-    script += "(function(){" +
+    script += "setTimeout(function(){" +
                     "const pattern = /.*\\/(.+?)\\.([a-z]+)/;" +
                     "const pathPattern = new RegExp('^(?:[^/]*(?:\\\\/(?:\\\\/[^/]*/?)?)?([^\\?]+)(?:\\\\?\\?.+)?)$');" +
                     "window.moedownloader = window.moedownloader || {};" +
@@ -158,8 +158,9 @@ exports.open = function (arg0, success, error) {
                             "}" +
                         "});" +
                     "}" +
+                    "window.moedownloader.intervalFinder();" +
                     "window.moedownloader.interval = setInterval(window.moedownloader.intervalFinder, 500);" +
-                "})();";
+                "}, 500);";
 
     window.inAppBrowserRef.addEventListener('loadstop', function() {
         window.inAppBrowserRef.executeScript({code: script});
