@@ -4,7 +4,8 @@
     <js-module name="moe-inappbrowser-download" src="www/moe-inappbrowser-download.js">
         <clobbers target="cordova.plugins.moeinappbrowserdownload" />
     </js-module>
-
+    <dependency id="cordova-plugin-androidx" url="https://github.com/dpa99c/cordova-plugin-androidx.git" />
+    <dependency id="cordova-plugin-androidx-adapter" url="https://github.com/dpa99c/cordova-plugin-androidx-adapter.git" />
     <dependency id="cordova-plugin-inappbrowser" url="https://github.com/os-adv-dev/cordova-plugin-moeinappbrowser.git" />
     <dependency id="cordova-plugin-file-opener2" url="https://github.com/os-adv-dev/cordova-plugin-file-opener2.git">
         <!--<variable name="ANDROID_SUPPORT_V4_VERSION" value="27.+" />-->
